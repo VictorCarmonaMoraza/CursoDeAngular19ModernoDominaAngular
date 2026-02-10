@@ -1,11 +1,10 @@
 import { registerLocaleData } from '@angular/common';
-import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import localeEs from '@angular/common/locales/es';
 import {
   ApplicationConfig,
-  importProvidersFrom,
   LOCALE_ID,
-  provideZoneChangeDetection,
+  provideZoneChangeDetection
 } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
@@ -19,12 +18,8 @@ registerLocaleData(localeEs, 'es');
 export const appConfig: ApplicationConfig = {
   providers: [
     { provide: LOCALE_ID, useValue: 'es' },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: SpinnerInterceptor,
-      multi: true,
-    },
-    provideHttpClient(withFetch()),
+
+    provideHttpClient(withFetch(), withInterceptors([SpinnerInterceptor])),
     provideAnimations(),
     provideToastr({
       positionClass: 'toast-bottom-right',
