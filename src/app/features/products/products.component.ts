@@ -31,8 +31,4 @@ export default class ProductsComponent implements OnInit {
   onAddToCart(product: Product): void {
     this._cartService.addToCart(product);
   }
-
-  trackById(index: number, product: Product): number {
-    return product.id;
-  }
 }
