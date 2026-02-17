@@ -1,5 +1,5 @@
 <section class="product-section">
-  @if("product$ | async as product"){
+  @if(product$ | async; as product){
   <div class="product-container">
     <div class="product-wrapper">
       <img [alt]="product.title" class="product-image" [src]="product?.image">
@@ -10,7 +10,7 @@
           <div class="product-reviews">
             @for(star of starsArray; track $index){
             <span>
-              @if("product.rating.rate"){
+              @if(product.rating.rate){
               <span [innerHTML]="getStarSVG($index, product.rating.rate)"></span>
               }
             </span>
